@@ -49,7 +49,7 @@ void listaProdutos(produto **vetor, int tamanho){
 
 int pedeCodigo(){
     int cod;
-    printf("Qual vai ser o codigo do produto que vai ser alterado:... \n");
+    printf("Qual o codigo:... \n");
     scanf("%d",&cod);
     return cod;
 }
@@ -85,27 +85,83 @@ void alteraProdutos(produto **vetor, int codigo, int tamanho){
     }
 }
 
+void listaProdutoCod(produto **vetor, int codigo, int tamanho){
+    int i;
+    bool ver=false;
+    for(i=0;i<tamanho;i++){
+        if(codigo==(*vetor)[i].codigo){
+            ver=true;
+            printf("\n\nInformacoes do Produto de codigo %d:\n",codigo);
+            printf("\nNome: %s", (*vetor)[i].nome);
+            printf("\nPreco: %f\n\n", (*vetor)[i].preco);
+            break;
+        } else{
+            continue;
+        }
+    }
+    if(!ver){
+        printf("\nCodigo nao cadastrado.\n");
+        return;
+    }
+}
+
 void exibirMenu(){
-    printf("=====================================\n");
-    printf("         🛒 MENU DE PRODUTOS         \n");
+    printf("\n=====================================\n");
+    printf("           MENU DE PRODUTOS         \n");
     printf("=====================================\n");
     printf("  [1] Cadastrar Produtos\n");
     printf("  [2] Alterar algum Produto\n");
     printf("  [3] Listar os produtos cadastrados\n");
-    printf("  [4] Sair\n");
+    printf("  [4] Listar as informacoes sobre um produto\n");
+    printf("  [5] Sair\n");
     printf("=====================================\n");
-    printf("Digite sua opção: ");
+    printf("Digite sua opção:...\n");
 }
 
 int main() {
     produto *vet;
-    int tamanho=pedeTamanho();
-    criaVetor(&vet, tamanho);
-    cadastraProdutos(&vet, tamanho);
-    listaProdutos(&vet, tamanho);
-    printf("\n\n");
-    int cod=pedeCodigo();
-    alteraProdutos(&vet, cod, tamanho);
-    listaProdutos(&vet, tamanho);
+    int escolha, tamanho, cod;
+    bool ver=false;
+    do{
+        exibirMenu();
+        scanf("%d",&escolha);
+        switch (escolha){
+            case 1:
+                if(!ver){
+                    tamanho = pedeTamanho();
+                    criaVetor(&vet, tamanho);
+                    cadastraProdutos(&vet, tamanho);
+                    ver=true;
+                } else{
+                    printf("\nJá foram cadastrados produtos.\n");
+                }
+                break;
+            case 2:
+                if(ver){
+                    cod=pedeCodigo();
+                    alteraProdutos(&vet,cod,tamanho);
+                }else{
+                    printf("\nAinda não foram cadastrados produtos.\n");
+                }
+                break;
+            case 3:
+                if(ver){
+                    listaProdutos(&vet, tamanho);
+                }else{
+                    printf("\nAinda não foram cadastrados produtos.\n");
+                }
+                break;
+            case 4:
+                if(ver){
+                    cod=pedeCodigo();
+                    listaProdutoCod(&vet,cod,tamanho);
+                }else{
+                    printf("\nAinda não foram cadastrados produtos.\n");
+                }
+                break;
+            case 5:
+                printf("\n\n\n\nSaindo...");
+        }
+    }while(escolha!=5);
     return 0;
 }
