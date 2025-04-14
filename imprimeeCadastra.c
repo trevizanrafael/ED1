@@ -22,7 +22,7 @@ Lista* inserirIni(Lista *l, int v){
 
 void imprimeLista(Lista *l, int v){
 	int i;
-	for(i=0;i<v;i+=1){
+	for(i=0;l!=NULL;i=i){
 		printf("%d -> ", l->info);
 		l = l->prox;
 	}
@@ -41,7 +41,7 @@ int main(){
 	l1 = inserirIni(l1,-3);
 	aux=l1;
 	
-	imprimeLista(aux,7);
+	imprimeLista(aux,1212);
 	             
 	return 0;
 }
