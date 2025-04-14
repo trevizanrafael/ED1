@@ -26,6 +26,7 @@ void imprimeLista(Lista *l, int v){
 		printf("%d -> ", l->info);
 		l = l->prox;
 	}
+	printf("NULL");
 }
 
 int main(){
@@ -34,9 +35,13 @@ int main(){
 	l1 = inserirIni(l1,3);
 	l1 = inserirIni(l1,2);
 	l1 = inserirIni(l1,1);
+	l1 = inserirIni(l1,0);
+	l1 = inserirIni(l1,-1);
+	l1 = inserirIni(l1,-2);
+	l1 = inserirIni(l1,-3);
 	aux=l1;
 	
-	imprimeLista(aux,3);
+	imprimeLista(aux,7);
 	             
 	return 0;
 }
