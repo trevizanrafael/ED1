@@ -120,6 +120,25 @@ void imprimeListaRec(Lista *l){
 	imprimeListaRec(l->prox);
 }
 
+void freeLista(Lista *l){
+	Lista *aux;
+	while(l != NULL){
+		aux = l;
+		l = l->prox;
+		free(aux);
+	}
+	
+}
+
+void freeListaRec(Lista *l){
+	if(l == NULL){
+		return;
+	}	
+	freeListaRec(l->prox);
+	free(l);
+}
+
+
 int main(){
 	Lista *ls;
 	ls = inicializa();
@@ -155,5 +174,11 @@ int main(){
 	printf("\n\n\n");
 	imprimeListaRec(lx);
 	
+	
+	freeLista(ls);
+	freeLista(lt);
+	freeLista(lx);
+	printf("\n\n\n");
+	printf("\n\n\n");
 	return 0;
 }
