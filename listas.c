@@ -139,6 +139,41 @@ void freeListaRec(Lista *l){
 }
 
 
+Lista* inserir4(Lista *l, int v){
+	Lista *aux, *novo, *pn;
+	aux = l;
+	novo = (Lista*)malloc(sizeof(Lista));
+	novo->info = v;
+	int i = 1;
+	if(aux==NULL){
+		inserirIni(aux,v);
+		printf("\n\nNao tem nenhum no.\n\n");
+		return aux;
+	} else if(aux->prox == NULL){
+		inserirFim(aux,v);
+		printf("\n\nTem apenas um no.\n\n");
+		return aux;
+	} else if(aux->prox->prox == NULL){
+		inserirFim(aux,v);
+		printf("\n\nTem apenas dois nos.\n\n");
+		return aux;
+	} else if(aux->prox->prox->prox == NULL){
+		inserirFim(aux,v);
+		printf("\n\nTem apenas três nos.\n\n");
+		return aux;
+	}
+	while(aux!=NULL&&i<3){
+		i++;
+		aux = aux->prox;	
+	}
+	pn = aux->prox;
+	aux->prox= novo;
+	novo->prox = pn;
+	return l;
+}
+
+
+
 int main(){
 	Lista *ls;
 	ls = inicializa();
@@ -157,7 +192,7 @@ int main(){
 		imprimeLista(lt);
 	
 	printf("\n\n\n");
-	inserir3(lt,20);
+	inserir3(lt,7979);
 	imprimeLista(lt);
 	
 	
@@ -173,10 +208,11 @@ int main(){
 	lx = retirar(lx, 3);
 	printf("\n\n\n");
 	imprimeListaRec(lx);
+	printf("\n\n\n");
+	lx = inserir4(lx, 1234);
+	imprimeListaRec(lx);
 	
 	
-	freeLista(ls);
-	freeLista(lt);
 	freeLista(lx);
 	printf("\n\n\n");
 	printf("\n\n\n");
