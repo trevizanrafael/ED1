@@ -114,9 +114,7 @@ int contaNos(ListaC *l){
 	return r;
 }
 
-ListaC* inserirOrd(ListaC *l, int v){
-	ListaC;
-	
+ListaC* inserirOrd(ListaC *l, int v){	
 	ListaC *novo = (ListaC*)malloc(sizeof(ListaC));
 	novo->info = v;
 	
@@ -149,6 +147,31 @@ ListaC* inserirOrd(ListaC *l, int v){
 	return l;
 }
 
+int contaOcorrencias(ListaC *l, int v){
+  if (l == NULL) 
+      return 0;
+
+  int cont = 0;
+  ListaC *aux = l;
+
+  do {
+      if (aux->info == v)
+          cont++;
+      aux = aux->prox;
+  } while (aux != l);
+
+  return cont;
+}
+
+ListaC* retirarMesmoV(ListaC *l, int v){
+  ListaC *aux = l;
+  int i = contaOcorrencias(l, v);
+  int j;
+  for(j=0;j<i;j++)
+    aux = remover(aux,v);
+  return aux;
+}
+
 int main(){
 	ListaC *lc1;
 	lc1 = inicializar();
@@ -175,7 +198,25 @@ int main(){
 	lc2 = inserirOrd(lc2, 5);
 	imprimir(lc2);
 	printf("\n%d",contaNos(lc2));
-	
+
+  printf("\n\n\n\n");
+
+  ListaC *lc3;
+  lc3 = inicializar();
+  lc3 = inserirFimC(lc3,0);
+  lc3 = inserirFimC(lc3,3);
+  lc3 = inserirFimC(lc3,4);
+  lc3 = inserirFimC(lc3,0);
+  lc3 = inserirFimC(lc3,0);
+  lc3 = inserirFimC(lc3,2);
+  lc3 = inserirFimC(lc3,7);
+  lc3 = inserirFimC(lc3,0);
+  lc3 = inserirFimC(lc3,9);
+	imprimir(lc3);
+  printf("\n%d",contaNos(lc3));
+  printf("\n\n\n\n");
+  lc3 = retirarMesmoV(lc3, 0);
+  imprimir(lc3);
+  printf("\n%d\n",contaNos(lc3));
 	return 0;
 }
-
