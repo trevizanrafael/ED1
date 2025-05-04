@@ -172,6 +172,59 @@ ListaC* retirarMesmoV(ListaC *l, int v){
   return aux;
 }
 
+void dividirListaC(ListaC *l, ListaC **l1, ListaC **l2) {
+    if (l == NULL || l->prox == l) {
+        *l1 = l;
+        *l2 = NULL;
+        return;
+    }
+
+    int total = contaNos(l);
+    int metade = total / 2;
+
+    ListaC *aux = l;
+    int i;
+
+    *l1 = l;
+
+    for (i = 1; i < metade; i++) {
+        aux = aux->prox;
+    }
+
+    *l2 = aux->prox;       
+    aux->prox = *l1;       
+    
+    
+    ListaC *fim = *l2;
+    while (fim->prox != l) {
+        fim = fim->prox;
+    }
+    fim->prox = *l2;    
+}
+
+ListaC* concatenarListasC(ListaC* l1, ListaC* l2) {
+    ListaC* nova = inicializar();
+    ListaC* aux;
+
+    aux = l1;
+    if (aux != NULL) {
+        do {
+            nova = inserirFimC(nova, aux->info);
+            aux = aux->prox;
+        } while (aux != l1);
+    }
+
+    aux = l2;
+    if (aux != NULL) {
+        do {
+            nova = inserirFimC(nova, aux->info);
+            aux = aux->prox;
+        } while (aux != l2);
+    }
+
+    return nova;
+}
+
 int main(){
 	ListaC *lc1;
 	lc1 = inicializar();
@@ -218,5 +271,39 @@ int main(){
   lc3 = retirarMesmoV(lc3, 0);
   imprimir(lc3);
   printf("\n%d\n",contaNos(lc3));
+  
+  
+  ListaC *lc4, *lc41 = inicializar(), *lc42 = inicializar();
+  lc4 = inicializar();
+  lc4 = inserirFimC(lc4,0);
+  lc4 = inserirFimC(lc4,1);
+  lc4 = inserirFimC(lc4,2);
+  lc4 = inserirFimC(lc4,3);
+  lc4 = inserirFimC(lc4,4);
+  lc4 = inserirFimC(lc4,5);
+  lc4 = inserirFimC(lc4,6);
+  lc4 = inserirFimC(lc4,7);
+  lc4 = inserirFimC(lc4,8);
+  lc4 = inserirFimC(lc4,9);
+  
+  printf("\n\n\n\n");
+  imprimir(lc4);
+  printf("\n%d\n",contaNos(lc4));
+  dividirListaC(lc4, &lc41, &lc42);
+  
+  printf("\n\n\n\n");
+  imprimir(lc41);
+  printf("\n%d\n",contaNos(lc41));
+  
+  printf("\n\n\n\n");
+  imprimir(lc42);
+  printf("\n%d\n",contaNos(lc42));
+  
+  ListaC *lc5 = inicializar();
+  lc5 = concatenarListasC(lc41, lc42);
+  printf("\n\n\n\n");
+  imprimir(lc5);
+  printf("\n%d\n",contaNos(lc5));
+  
 	return 0;
 }
