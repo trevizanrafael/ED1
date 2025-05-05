@@ -45,6 +45,21 @@ ListaD* inserirFim(ListaD *l, int v){
 	return l;
 }
 
+void imprimirTras(ListaD *l){
+	if(l == NULL){
+		printf("LISTA VAZIA!");
+		return;
+	}
+	ListaD *aux = l;
+	while (aux->prox != NULL) {
+    aux = aux->prox;
+	}
+	do{
+		printf("%d -> ", aux->info);
+		aux = aux->ant;
+	} while (aux != NULL);
+}
+
 void imprimir(ListaD *l){
 	if(l == NULL){
 		printf("LISTA VAZIA!");
@@ -72,9 +87,10 @@ int main(){
 	l1 = inicializar();
 	l1 = inserirIni(l1, 10);
 	l1 = inserirIni(l1, 20);
-	l1 = inserirFim(l1, 30);
+	l1 = inserirIni(l1, 30);
 	l1 = inserirIni(l1, 40);
 	l1 = inserirIni(l1, 50);
-	imprimir(l1);
+	//imprimir(l1);
+	imprimirTras(l1);
 	return 0;
 }
