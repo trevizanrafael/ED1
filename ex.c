@@ -51,6 +51,7 @@ void imprimirTras(ListaD *l){
 		return;
 	}
 	ListaD *aux = l;
+	printf("NULL -> ");
 	while (aux->prox != NULL) {
     aux = aux->prox;
 	}
@@ -58,6 +59,7 @@ void imprimirTras(ListaD *l){
 		printf("%d -> ", aux->info);
 		aux = aux->ant;
 	} while (aux != NULL);
+	printf("NULL");
 }
 
 void imprimir(ListaD *l){
@@ -90,7 +92,8 @@ int main(){
 	l1 = inserirIni(l1, 30);
 	l1 = inserirIni(l1, 40);
 	l1 = inserirIni(l1, 50);
-	//imprimir(l1);
+	imprimir(l1);
+	printf("\n\n");
 	imprimirTras(l1);
 	return 0;
 }
