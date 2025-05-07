@@ -84,6 +84,33 @@ void imprimirRec(ListaD *l){
 	imprimirRec(l->prox);
 }
 
+ListaD* excluir(ListaD *l, int v){
+	ListaD *aux = l;
+	while(aux != NULL && aux->info != v){
+		aux = aux->prox;
+	}
+	if(aux == NULL){
+		printf("NAO TEM ESSE NUMERO\n\n");
+		return l;
+	}
+	else{
+		if(aux == l){
+			aux->prox->ant = NULL;
+			l = aux->prox;
+			free(aux);
+			return l;
+		}
+		else{
+			aux->ant->prox = aux->prox;
+			if(aux->prox != NULL)
+				aux->prox->ant = aux->ant;
+			free(aux);
+			return l;
+		}
+		
+	}
+}
+
 int main(){
 	ListaD *l1;
 	l1 = inicializar();
@@ -95,5 +122,8 @@ int main(){
 	imprimir(l1);
 	printf("\n\n");
 	imprimirTras(l1);
+	printf("\n\n");
+	l1 = excluir(l1, 20);
+	imprimir(l1);
 	return 0;
 }
