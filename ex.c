@@ -121,22 +121,21 @@ ListaD* eliminar(ListaD *l){
 	return l;
 }
 
+void exibirMenu() {
+    printf("==============================================\n");
+    printf("       MENU - Lista Duplamente Encadeada       \n");
+    printf("==============================================\n");
+    printf("1. Inserir elemento no início da lista\n");
+    printf("2. Inserir elemento no final da lista\n");
+    printf("3. Remover elemento da lista (escolhendo por valor)\n");
+    printf("4. Remover todos os elementos da lista\n");
+    printf("5. Exibir todos os elementos da lista\n");
+    printf("6. Exibir todos os elementos da lista\n");
+    printf("7. Sair\n");
+    printf("==============================================\n");
+    printf("Escolha uma opção: ");
+}
+
 int main(){
-	ListaD *l1;
-	l1 = inicializar();
-	l1 = inserirIni(l1, 10);
-	l1 = inserirIni(l1, 20);
-	l1 = inserirIni(l1, 30);
-	l1 = inserirIni(l1, 40);
-	l1 = inserirIni(l1, 50);
-	imprimir(l1);
-	printf("\n\n");
-	imprimirTras(l1);
-	printf("\n\n");
-	l1 = excluir(l1, 20);
-	imprimir(l1);
-	l1 = eliminar(l1);
-	printf("\n\n");	
-	imprimir(l1);
-	return 0;
+	
 }
