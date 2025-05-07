@@ -111,6 +111,16 @@ ListaD* excluir(ListaD *l, int v){
 	}
 }
 
+ListaD* eliminar(ListaD *l){
+	if(l == NULL)
+		printf("LISTA JA TA VAZIA\n\n");
+	while(l != NULL){
+		l = excluir(l, l->info);
+		l = l->prox;
+	}
+	return l;
+}
+
 int main(){
 	ListaD *l1;
 	l1 = inicializar();
@@ -124,6 +134,9 @@ int main(){
 	imprimirTras(l1);
 	printf("\n\n");
 	l1 = excluir(l1, 20);
+	imprimir(l1);
+	l1 = eliminar(l1);
+	printf("\n\n");	
 	imprimir(l1);
 	return 0;
 }
