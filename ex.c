@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct listad{
 	struct listad *ant;
 	int quantidade;
 	int info;//codigo
+	float preco;
 	char nome[50];
 	struct listad *prox;
 }; 
@@ -14,10 +16,13 @@ ListaD* inicializar(){
 	return NULL;
 }
 
-ListaD* inserirIni(ListaD *l, int v){
+ListaD* inserirIni(ListaD *l, int v, int q, float f, char n[50]){
 	ListaD *novo;
 	novo = (ListaD*)malloc(sizeof(ListaD));
 	novo->info = v;
+	novo->quantidade = q;
+	novo->preco = f;
+	strcpy(novo->nome, n);
 	novo->ant = NULL;
 	
 	if(l == NULL){
@@ -28,23 +33,6 @@ ListaD* inserirIni(ListaD *l, int v){
 		l->ant = novo;
 	}
 	return novo;
-}
-
-ListaD* inserirFim(ListaD *l, int v){
-	ListaD *aux = l;
-	if(l == NULL){
-		aux = inserirIni(aux, v);
-		return aux;
-	}
-	ListaD *novo;
-	novo = (ListaD*)malloc(sizeof(ListaD));
-	novo->prox = NULL;
-	novo->info = v;
-	while(aux->prox != NULL){
-		aux = aux->prox;
-	}
-	aux->prox = novo;
-	return l;
 }
 
 void imprimir(ListaD *l){
@@ -113,7 +101,9 @@ void exibirMenu() {
 
 
 int main() {
-    int escolha;
+    int escolha, info, quantidade;
+    float preco;
+    char nome[50];
     ListaD *produtos;
     produtos = inicializar();
     do{
@@ -124,7 +114,8 @@ int main() {
                 printf("Saindo...");
                 break;
             case 1:
-                printf("Fodase1");
+                printf("\nDigite o nome do produto:\n");
+                scanf(" %[^\n]", nome);
                 break;
             case 2:
                 printf("Fodase2");
