@@ -100,7 +100,23 @@ void exibirMenu() {
     printf("Escolha uma opção: ");
 }
 
+void imprimirCod(ListaD *l, int v){
+    if(l == NULL){
+        printf("NAO EXISTEM PRODUTOS CADASTRADOS.");
+        return;
+    }
+    while(l->info != v && l->prox != NULL){
+        l = l->prox;
+    }
+    if(l->info == v){
+        
+    }
+    if(l->prox == NULL && l->info != v){
+        printf("NAO TEM ESSE CODIGO");
+    }
+}
 
+void imprimirno
 
 int main() {
     int escolha, info, quantidade;
@@ -135,7 +151,9 @@ int main() {
                 produtos = excluir(produtos, info);
                 break;
             case 3:
-                printf("Fodase3");
+                printf("\nDigite o codigo que quer consultar:\n");
+                scanf("%d",&info);
+                
                 break;
             case 4:
                 printf("Fodase4");
