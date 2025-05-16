@@ -55,16 +55,18 @@ ListaD* excluir(ListaD *l, int v){
 		aux = aux->prox;
 	}
 	if(aux == NULL){
-		printf("NAO TEM ESSE NUMERO\n\n");
+		printf("\nNAO TEM ESSE CODIGO\n\n");
 		return l;
 	}
 	else{
 		if(aux == l){
-			aux->prox->ant = NULL;
-			l = aux->prox;
-			free(aux);
-			return l;
-		}
+            if(aux->prox != NULL)
+                aux->prox->ant = NULL;
+            l = aux->prox;
+            free(aux);
+            return l;
+        }
+		
 		else{
 			aux->ant->prox = aux->prox;
 			if(aux->prox != NULL)
@@ -116,9 +118,21 @@ int main() {
             case 1:
                 printf("\nDigite o nome do produto:\n");
                 scanf(" %[^\n]", nome);
+                printf("Digite o valor do produto:\n");
+                scanf("%f",&preco);
+                getchar();
+                printf("Digite a quantidade de unidades em estoque:\n");
+                scanf("%d", &quantidade);
+                getchar();
+                printf("Digite o codigo do produto:\n");
+                scanf("%d", &info);
+                getchar();
+                produtos = inserirIni(produtos, info, quantidade, preco, nome);
                 break;
             case 2:
-                printf("Fodase2");
+                printf("\nDigite o codigo que você quer apagar:\n");
+                scanf("%d",&info);
+                produtos = excluir(produtos, info);
                 break;
             case 3:
                 printf("Fodase3");
@@ -132,7 +146,5 @@ int main() {
         }
     }while(escolha != 0);
 
-
-
     return 0;
-}
+} 
