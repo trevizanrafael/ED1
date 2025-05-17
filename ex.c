@@ -100,6 +100,32 @@ void exibirMenu() {
     printf("Escolha uma opção: ");
 }
 
+
+void imprimirProduto(ListaD *produto) {
+    if (produto == NULL) {
+        printf("Produto não encontrado.\n");
+        return;
+    }
+
+    printf("\n===== INFORMAÇÕES DO PRODUTO =====\n");
+    printf("Código: %d\n", produto->info);
+    printf("Nome: %s\n", produto->nome);
+    printf("Preço: R$ %.2f\n", produto->preco);
+    printf("Quantidade em estoque: %d\n", produto->quantidade);
+    printf("==================================\n\n");
+}
+
+void imprimirTodos(ListaD *l){
+    if(l == NULL){
+        printf("NAO TEM PRODUTOS\n");
+        return;
+    }
+    while(l != NULL){
+        imprimirProduto(l);
+        l = l->prox;
+    }
+}
+
 void imprimirCod(ListaD *l, int v){
     if(l == NULL){
         printf("NAO EXISTEM PRODUTOS CADASTRADOS.");
@@ -109,18 +135,30 @@ void imprimirCod(ListaD *l, int v){
         l = l->prox;
     }
     if(l->info == v){
-        
+        imprimirProduto(l);
+        return;
     }
     if(l->prox == NULL && l->info != v){
-        printf("NAO TEM ESSE CODIGO");
+        printf("\nNAO TEM ESSE CODIGO\n\n");
     }
 }
 
-void imprimirno
+float calcValorTotal(ListaD *l){
+    if(l == NULL){
+        printf("NAO TEM PRODUTOS\n");
+        return 0;
+    }
+    float soma=0;
+    while(l != NULL){
+        soma += (l->preco)*(l->quantidade);
+        l = l->prox;
+    }
+    return soma;
+}
 
 int main() {
     int escolha, info, quantidade;
-    float preco;
+    float preco, soma;
     char nome[50];
     ListaD *produtos;
     produtos = inicializar();
@@ -153,16 +191,17 @@ int main() {
             case 3:
                 printf("\nDigite o codigo que quer consultar:\n");
                 scanf("%d",&info);
-                
+                imprimirCod(produtos, info);
                 break;
             case 4:
-                printf("Fodase4");
+                printf("\n");
+                imprimirTodos(produtos);
                 break;
             case 5:
-                printf("Fodase5");
+                soma = calcValorTotal(produtos);
+                printf("\n\nA SOMA DOS VALORES DE TODOS OS PRODUTOS E:\n\n%d\n\n", soma);
                 break;
         }
     }while(escolha != 0);
-
     return 0;
 } 
