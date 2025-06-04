@@ -147,15 +147,20 @@ int iguais(pilha *p1, pilha *p2){
 int pare(pilha *p1){
 	int d=0;
 	int e=0;
+	int abertos=0;
 	pilha *aux = p1;
 	while(aux->topo != NULL){
 		if(aux->topo->info == '('){
 			e++;
+			abertos++;
 		}
 		if(aux->topo->info == ')'){
 			d++;
+			abertos--
 		}
-		
+		if(abertos<0){
+		    return 0;
+		}
 		aux->topo = aux->topo->prox;
 	}
 	if(d!=e)
