@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 struct No{
 	int info;
 	struct No *prox;
@@ -12,6 +13,10 @@ struct Fila{
 	no *fim;
 };
 typedef struct Fila fila;
+
+int vazia(fila *f){
+	return f->ini==NULL;
+}
 
 fila* iniciar(){
 	fila *f;
@@ -67,8 +72,17 @@ void imprimir(fila *f){
 	printf("\n\n\n");
 }
 
-int vazia(fila *f){
-	return f->ini==NULL;
+int funcao1(fila *f){
+    fila *aux = f;
+    if(aux->ini == NULL)
+        return 0;
+    
+    int ret=0;
+    while(aux->ini != NULL){
+        ret++;
+        retirar(aux);
+    }
+    return ret;
 }
 
 int main(){
@@ -78,10 +92,7 @@ int main(){
 	inserir(f1, 2);
 	inserir(f1, 3);
 	imprimir(f1);
-	retirar(f1);
-	retirar(f1);
-	retirar(f1);
-	imprimir(f1);
+	printf("\n\n\n%d", funcao1(f1));
 	
 	return 0;
 }
